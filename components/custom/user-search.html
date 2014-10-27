@@ -1,9 +1,26 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/paper-input/paper-input.html"/>
+<link rel="import" href="../bower_components/paper-button/paper-button.html"/>
 
 <polymer-element name="user-search">
     <template>
-        <core-field>
-            <input placeholder="Enter GitHub user name" flex>
-        </core-field>
+        <link rel="stylesheet" href="../../style/user-search.css">
+        <div id="user_search" horizontal layout>
+            <div id="github_icon"></div>
+            <paper-input id="name" floatinglabel label="Github user name" flex></paper-input>
+            <paper-button id="button" raised >Search</paper-button>
+        </div>
+
     </template>
+    <script>
+        Polymer("user-search",
+                {
+                    ready: function() {
+                        this.$.button.addEventListener('click', this.doClick);
+                    },
+                    doClick: function(){
+                        alert(this.$);
+                    }
+                });
+    </script>
 </polymer-element>
