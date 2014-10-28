@@ -1,23 +1,36 @@
 @import "../font-awesome-4.2.0/less/font-awesome";
 
 @border-color: #222222;
+@light-border-color: lighten(@border-color, 50%);
+
+.border-with-shadow(@color){
+  border: 2px solid @color;
+  box-shadow: 5px 5px 5px lighten(@color, 50%);
+}
 
 
 #user_search{
-  border: 2px solid @border-color;
+  .border-with-shadow(@border-color);
   padding: 10px;
   font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
   border-radius: 10px;
   margin: 0 40px;
-  box-shadow: 5px 5px 5px lighten(@border-color, 50%);
+
+  &.small{
+    .border-with-shadow(@light-border-color);
+    height: 250px;
+  }
+
+  #github_icon{
+    .fa-icon();
+    font-size: 60px;
+    content: @fa-var-github;
+  }
+
+  paper-input{
+    margin: 0 40px
+  }
 }
 
-paper-input{
-  margin: 0 40px
-}
 
-#github_icon{
-  .fa-icon();
-  font-size: 60px;
-  content: @fa-var-github;
-}
+

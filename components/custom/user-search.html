@@ -1,25 +1,49 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/paper-input/paper-input.html"/>
 <link rel="import" href="../bower_components/paper-button/paper-button.html"/>
+<link rel="import" href="../bower_components/core-media-query/core-media-query.html"/>
+
+
+<style>
+    @font-face {
+        font-family: 'FontAwesome';
+        src: url('../../font-awesome-4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0');
+        src: url('../../font-awesome-4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'),
+        url('../../font-awesome-4.2.0/fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'),
+        url('../../font-awesome-4.2.0/fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'),
+        url('../../font-awesome-4.2.0/fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+
 
 <polymer-element name="user-search">
     <template>
+        <core-media-query query="{{query}}" queryMatches="{{smallscreen}}" ></core-media-query>
         <link rel="stylesheet" href="../../style/user-search.css">
-        <div id="user_search" horizontal layout>
-            <div id="github_icon"></div>
-            <paper-input id="name" floatinglabel label="Github user name" flex></paper-input>
-            <paper-button id="button" raised >Search</paper-button>
-        </div>
 
+        <template if="{{smallscreen}}" >
+            <div id="user_search" class="small" vertical layout>
+                <paper-input id="name" label="{{message}}" flex></paper-input>
+                <paper-button id="button" on-click="{{doClick}}" raised flex>Search</paper-button>
+            </div>
+        </template>
+
+        <template if="{{!smallscreen}}">
+            <div id="user_search" horizontal layout>
+                <div id="github_icon"></div>
+                <paper-input id="name" floatinglabel label="{{message}}" flex></paper-input>
+                <paper-button id="button" on-click="{{doClick}}" raised >Search</paper-button>
+            </div>
+        </template>
     </template>
     <script>
-        Polymer("user-search",
-                {
-                    ready: function() {
-                        this.$.button.addEventListener('click', this.doClick);
-                    },
+        Polymer("user-search", {
+                    query: 'max-width: 640px',
+                    message: 'GitHub user name',
                     doClick: function(){
-                        alert(this.$);
+                        alert(this.$.name.value);
                     }
                 });
     </script>
