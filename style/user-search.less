@@ -24,7 +24,9 @@
   #github_icon{
     .fa-icon();
     font-size: 60px;
-    content: @fa-var-github;
+    &:before{
+      content: @fa-var-github;
+    }
   }
 
   paper-input{
